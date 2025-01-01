@@ -2,6 +2,7 @@ import React from 'react';
 import Banner from './Banner';
 import SectionHeading from '../../Components/common/SectionHeading';
 import FeaturesFoods from '../../Components/FeaturesFoods';
+import HomeMenuSec from '../../Components/Home/HomeMenuSec';
 
 const Home = () => {
   return (
@@ -12,6 +13,7 @@ const Home = () => {
       {/* ------------- */}
       <FeaturesFoods></FeaturesFoods>
       {/* ------------- */}
+      <HomeMenuSec />
 
     </div>
   );  
