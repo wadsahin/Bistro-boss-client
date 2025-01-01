@@ -63,7 +63,7 @@ const Footer = () => {
       </div>
       <div className="footer footer-center bg-black text-neutral-content p-4">
         <aside>
-          <p>Copyright © {new Date().getFullYear()} - All right reserved by Bistro Group of Industry Ltd</p>
+          <p>Copyright &copy; {new Date().getFullYear()} - All right reserved by Bistro Group of Industry Ltd</p>
         </aside>
       </div>
 
