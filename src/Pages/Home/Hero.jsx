@@ -2,7 +2,7 @@ import image from '../../assets/home/chef-service.jpg';
 const Hero = () => {
   return (
     <div
-      className="hero h-[572px] my-16"
+      className="hero h-[460px] my-16 bg-fixed"
       style={{
         backgroundImage: `url("${image}")`,
       }}>
