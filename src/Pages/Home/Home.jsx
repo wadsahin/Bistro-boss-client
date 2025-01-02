@@ -6,10 +6,14 @@ import HomeMenuSec from '../../Components/Home/HomeMenuSec';
 import Hero from './Hero';
 import Featured from './Featured';
 import Testimonials from './Testimonials';
+import { Helmet } from 'react-helmet-async';
 
 const Home = () => {
   return (
     <div>
+      <Helmet>
+        <title>Bistro Boss | Home</title>
+      </Helmet>
       <Banner></Banner>
       {/* ------------- */}
       <SectionHeading heading="Online Order" subheading="From 11:00 am to 10:00 pm"></SectionHeading>
