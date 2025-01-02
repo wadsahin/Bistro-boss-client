@@ -12,7 +12,7 @@ const Navbar = () => {
     <button className='btn btn-sm'>Sign In</button>
   </>
   return (
-    <div className="navbar justify-between fixed z-10 w-11/12 mx-auto bg-black opacity-60 text-white ">
+    <div className="navbar justify-between fixed z-10 w-11/12 mx-auto bg-black opacity-60 text-white py-0">
       <div className="navbar-start w-fit">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
