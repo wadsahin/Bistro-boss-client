@@ -5,14 +5,15 @@ const Navbar = () => {
 
   const NavOptions = <>
     <li><NavLink to="/">Home</NavLink></li>
+    <li><NavLink to="/menu">Our Menu</NavLink></li>
+    <li><NavLink to="/order">Order Food</NavLink></li>
     <li><NavLink to="/">Contact us</NavLink></li>
     <li><NavLink to="/dashboard">Dashboard</NavLink></li>
-    <li><NavLink to="/menu">Our Menu</NavLink></li>
     <li><NavLink to="/shop">Our Shop</NavLink></li>
     <button className='btn btn-sm'>Sign In</button>
   </>
   return (
-    <div className="navbar justify-between fixed z-10 w-11/12 mx-auto bg-black opacity-60 text-white py-0">
+    <div className="navbar justify-between fixed z-10 w-11/12 mx-auto bg-black bg-opacity-60 text-white py-0">
       <div className="navbar-start w-fit">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
