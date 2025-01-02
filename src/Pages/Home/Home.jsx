@@ -5,6 +5,7 @@ import FeaturesFoods from '../../Components/FeaturesFoods';
 import HomeMenuSec from '../../Components/Home/HomeMenuSec';
 import Hero from './Hero';
 import Featured from './Featured';
+import Testimonials from './Testimonials';
 
 const Home = () => {
   return (
@@ -20,13 +21,15 @@ const Home = () => {
       <SectionHeading heading="From Our Menu" subheading="Check it Out"></SectionHeading>
       {/* ------------- */}
       <HomeMenuSec />
-       {/* ------------- */}
-       <SectionHeading heading="Our Recommends" subheading="Should Try"></SectionHeading>
+      {/* ------------- */}
+      <SectionHeading heading="Our Recommends" subheading="Should Try"></SectionHeading>
       {/* ------------- */}
       <Featured></Featured>
+      {/* ------------- */}
+      <Testimonials />
 
     </div>
-  );  
+  );
 };
 
 export default Home;

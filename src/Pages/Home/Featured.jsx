@@ -14,7 +14,7 @@ const Featured = () => {
           <div>
             <SectionHeading heading="Featured Items" subheading="Check it Out" />
           </div>
-          <div className='flex gap-5'>
+          <div className='flex gap-8 items-center'>
             <div className='flex-1'>
               <img src={featured} alt="" />
             </div>
