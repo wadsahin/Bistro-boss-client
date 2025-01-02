@@ -5,9 +5,15 @@ import 'react-tabs/style/react-tabs.css';
 import Cover from "../Shared/Cover/Cover";
 import orderCoverImg from "../../assets/shop/banner2.jpg";
 import { useState } from "react";
+import FoodCard from "../../Components/common/FoodCard";
+import OrderTabCollection from "./OrderTabCollection";
+import { useParams } from "react-router-dom";
 
 const Order = () => {
   const [index, setIndex] = useState(0);
+  const category = useParams();
+  console.log(category);
+  
   const [menu] = useMenu();
   const salads = menu.filter(item => item.category === "salad");
   const drinks = menu.filter(item => item.category === "drinks");
@@ -31,8 +37,22 @@ const Order = () => {
           <Tab>Dessert</Tab>
           <Tab>Drinks</Tab>
         </TabList>
-        <TabPanel></TabPanel>
-        <TabPanel></TabPanel>
+        <TabPanel>
+          <OrderTabCollection items={salads} />
+        </TabPanel>
+        <TabPanel>
+          <OrderTabCollection items={pizzas} />
+        </TabPanel>
+        <TabPanel>
+          <OrderTabCollection items={soups} />
+        </TabPanel>
+        <TabPanel>
+          <OrderTabCollection items={desserts} />
+        </TabPanel>
+        <TabPanel>
+          <OrderTabCollection items={drinks} />
+        </TabPanel>
+
       </Tabs>
       <br />
     </div>
