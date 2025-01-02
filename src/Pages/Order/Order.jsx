@@ -10,9 +10,11 @@ import OrderTabCollection from "./OrderTabCollection";
 import { useParams } from "react-router-dom";
 
 const Order = () => {
-  const [index, setIndex] = useState(0);
-  const category = useParams();
-  console.log(category);
+  const categories = ['offers','salads', 'pizza', 'soups', 'desserts'];
+  const {category} = useParams();
+  const initialIndex = categories.indexOf(category);
+  const [tabIndex, setTabIndex] = useState(initialIndex);
+
   
   const [menu] = useMenu();
   const salads = menu.filter(item => item.category === "salad");
@@ -29,14 +31,18 @@ const Order = () => {
       </Helmet>
       <Cover img={orderCoverImg} title="Order Food"></Cover>
       <br />
-      <Tabs className="text-center" defaultIndex={1} onSelect={(index) => setIndex(index)}>
+      <Tabs className="text-center" defaultIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
         <TabList>
-          <Tab>Salad</Tab>
+          <Tab>Offers</Tab>
+          <Tab>Salads</Tab>
           <Tab>Pizza</Tab>
-          <Tab>Soup</Tab>
-          <Tab>Dessert</Tab>
-          <Tab>Drinks</Tab>
+          <Tab>Soups</Tab>
+          <Tab>Desserts</Tab>
+          {/* <Tab>Drinks</Tab> */}
         </TabList>
+        <TabPanel>
+          <OrderTabCollection items={offered} />
+        </TabPanel>
         <TabPanel>
           <OrderTabCollection items={salads} />
         </TabPanel>
@@ -49,9 +55,9 @@ const Order = () => {
         <TabPanel>
           <OrderTabCollection items={desserts} />
         </TabPanel>
-        <TabPanel>
+        {/* <TabPanel>
           <OrderTabCollection items={drinks} />
-        </TabPanel>
+        </TabPanel> */}
 
       </Tabs>
       <br />
