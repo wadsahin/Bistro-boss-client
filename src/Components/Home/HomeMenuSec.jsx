@@ -10,7 +10,7 @@ const HomeMenuSec = () => {
   const popular = menu.filter(item => item.category === "popular");
   console.log(popular);
   return (
-    <div className="mb-10">
+    <div className="mb-10 mx-16">
       <div className="grid gap-5 md:grid-cols-2">
         {
           popular.map(item => <MenuItemSlat key={item._id} item={item}  />)
