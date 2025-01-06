@@ -10,7 +10,8 @@ const Navbar = () => {
     <li><NavLink to="/">Contact us</NavLink></li>
     <li><NavLink to="/dashboard">Dashboard</NavLink></li>
     <li><NavLink to="/shop">Our Shop</NavLink></li>
-    <button className='btn btn-sm'>Sign In</button>
+    <button className='btn btn-sm'><NavLink to="/login">Sign In</NavLink></button>
+    
   </>
   return (
     <div className="navbar justify-between fixed z-10 w-11/12 mx-auto bg-black bg-opacity-60 text-white py-0">
