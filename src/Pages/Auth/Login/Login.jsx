@@ -1,9 +1,15 @@
 import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha } from 'react-simple-captcha';
 import useAuth from '../../../Hooks/useAuth';
 import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 const Login = () => {
   const { signInUser } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+  // console.log(location);
+
+  let from = location.state?.from?.pathname || "/";
 
   const handleLogin = e => {
     e.preventDefault();
@@ -11,14 +17,19 @@ const Login = () => {
     const email = form.email.value;
     const password = form.password.value;
     // console.log({ email, password });
-    
+
     // Login user
     signInUser(email, password)
       .then(result => {
         const user = result.user;
-        console.log(user);
+        // console.log(user);
         if (user) {
-          alert("Logged in successfull");
+          Swal.fire({
+            title: "Logged In!",
+            text: "Login successful",
+            icon: "success"
+          });
+          navigate(from, {replace: true});
         }
       })
       .catch(err => {

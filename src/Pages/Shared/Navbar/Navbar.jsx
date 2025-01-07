@@ -1,17 +1,42 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import useAuth from '../../../Hooks/useAuth';
+import Swal from 'sweetalert2';
 
 const Navbar = () => {
+  const { user, signOutUser } = useAuth();
+  console.log(user);
+
+  const handleSignout = () =>{
+    signOutUser()
+    .then(() => {
+      Swal.fire({
+        title: "Signout!",
+        text: "Signout successful",
+        icon: "success"
+      });
+    })
+    .catch(err => {console.log(err)})
+  }
+
 
   const NavOptions = <>
     <li><NavLink to="/">Home</NavLink></li>
     <li><NavLink to="/menu">Our Menu</NavLink></li>
     <li><NavLink to="/order/offers">Order Food</NavLink></li>
-    <li><NavLink to="/">Contact us</NavLink></li>
+    <li><NavLink to="/contact">Contact us</NavLink></li>
     <li><NavLink to="/dashboard">Dashboard</NavLink></li>
     <li><NavLink to="/shop">Our Shop</NavLink></li>
-    <button className='btn btn-sm'><NavLink to="/login">Sign In</NavLink></button>
-    
+    <li><NavLink to="/secret">Secret</NavLink></li>
+    {
+      user ? <>
+        <button onClick={handleSignout} className='btn btn-sm btn-error text-white'>Signout</button>
+      </> : <>
+        <button className='btn btn-sm'><NavLink to="/login">Sign In</NavLink></button>
+      </>
+    }
+
+
   </>
   return (
     <div className="navbar justify-between fixed z-10 w-11/12 mx-auto bg-black bg-opacity-60 text-white py-0">
@@ -38,7 +63,7 @@ const Navbar = () => {
           </ul>
         </div>
         <a className="text-2xl font-semibold"><span className='text-orange-500'>Bistro</span> <span>Boss</span></a>
-      </div>  
+      </div>
       <div className="hidden lg:flex">
         <ul className="menu menu-horizontal px-1 gap-3 items-center">
           {NavOptions}
