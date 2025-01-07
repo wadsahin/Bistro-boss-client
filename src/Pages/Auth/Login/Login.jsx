@@ -1,21 +1,33 @@
 import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha } from 'react-simple-captcha';
 import useAuth from '../../../Hooks/useAuth';
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 const Login = () => {
-  const {userName} = useAuth();
-
+  const { signInUser } = useAuth();
 
   const handleLogin = e => {
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-    // const loginInfo = {email, password};
-    console.log({ email, password });
+    // console.log({ email, password });
+    
+    // Login user
+    signInUser(email, password)
+      .then(result => {
+        const user = result.user;
+        console.log(user);
+        if (user) {
+          alert("Logged in successfull");
+        }
+      })
+      .catch(err => {
+        alert(err.code);
+      })
   }
 
-  useEffect(() =>{
-    loadCaptchaEnginge(6); 
+  useEffect(() => {
+    loadCaptchaEnginge(6);
   }, [])
   return (
     <div className="hero bg-base-200 min-h-screen my-10">
@@ -50,6 +62,7 @@ const Login = () => {
               </label>
               <input type="text" name="captcha" placeholder="Type above text" className="input input-bordered" required />
             </div>
+            <p><small>New here? Please <Link className='underline' to="/register">Register</Link></small></p>
             <div className="form-control mt-6">
               <button className="btn btn-primary">Login</button>
             </div>
