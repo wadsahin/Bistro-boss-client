@@ -1,10 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../../Hooks/useAuth";
 import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
 
 
 const Register = () => {
-  const { createUser } = useAuth();
+  const { createUser, updateUserProfile } = useAuth();
   const navigate = useNavigate();
 
   // React hook form
@@ -22,8 +23,19 @@ const Register = () => {
       .then(result => {
         const user = result.user;
         if (user) {
-          alert("Registed successfully");
-          navigate("/");
+          updateUserProfile(data.name, data.photo)
+            .then(() => {
+              Swal.fire({
+                title: "Registed!",
+                text: "Registed successfully",
+                icon: "success"
+              });
+              navigate("/");
+            })
+            .catch(err => {
+              console.log(err.code);
+            })
+
         }
       })
       .catch(err => {
@@ -48,6 +60,13 @@ const Register = () => {
                 <span className="label-text">Name</span>
               </label>
               <input type="text" name="name" {...register("name", { required: true })} placeholder="Your name" className="input input-bordered" required />
+              {errors.name && <span className="text-red-400">Name is required</span>}
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">PhotoURL</span>
+              </label>
+              <input type="url" name="photo" {...register("photo", { required: true })} placeholder="Your photo url" className="input input-bordered" required />
               {errors.name && <span className="text-red-400">Name is required</span>}
             </div>
             <div className="form-control">

@@ -30,6 +30,7 @@ const Navbar = () => {
     <li><NavLink to="/secret">Secret</NavLink></li>
     {
       user ? <>
+        <span><img className='w-12 h-12 rounded-badge' src={user?.photoURL} alt="" /></span>
         <button onClick={handleSignout} className='btn btn-sm btn-error text-white'>Signout</button>
       </> : <>
         <button className='btn btn-sm'><NavLink to="/login">Sign In</NavLink></button>
