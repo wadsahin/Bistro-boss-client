@@ -1,19 +1,24 @@
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../../Hooks/useAuth";
+import { useForm } from "react-hook-form";
+
 
 const Register = () => {
   const { createUser } = useAuth();
   const navigate = useNavigate();
 
-  const handleRegister = e => {
-    e.preventDefault();
-    const form = e.target;
-    const name = form.name.value;
-    const email = form.email.value;
-    const password = form.password.value;
-    console.log({ name, email, password });
+  // React hook form
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => {
+    // console.log(data);
     // Create user
-    createUser(email, password)
+    createUser(data.email, data.password)
       .then(result => {
         const user = result.user;
         if (user) {
@@ -25,6 +30,7 @@ const Register = () => {
         alert(err.message);
       })
   }
+
   return (
     <div className="hero bg-base-200 min-h-screen">
       <div className="hero-content flex-col lg:flex-row-reverse">
@@ -36,24 +42,32 @@ const Register = () => {
           </p>
         </div>
         <div className="card bg-base-100 w-full flex-1 shrink-0 shadow-2xl">
-          <form onSubmit={handleRegister} className="card-body">
+          <form onSubmit={handleSubmit(onSubmit)} className="card-body" noValidate>
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Name</span>
               </label>
-              <input type="text" name="name" placeholder="Your name" className="input input-bordered" required />
+              <input type="text" name="name" {...register("name", { required: true })} placeholder="Your name" className="input input-bordered" required />
+              {errors.name && <span className="text-red-400">Name is required</span>}
             </div>
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Email</span>
               </label>
-              <input type="email" name="email" placeholder="email" className="input input-bordered" required />
+              <input type="email" name="email" {...register("email", { required: true })} placeholder="email" className="input input-bordered" required />
+              {errors.email && <span className="text-red-400">Email is required</span>}
             </div>
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Password</span>
               </label>
-              <input type="password" name="password" placeholder="password" className="input input-bordered" required />
+              <input type="password" name="password"
+                {...register("password", { required: true, minLength: 6, maxLength: 10, pattern: /(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{6,}/ })} placeholder="password" className="input input-bordered" required />
+              {/* {errors.password?.type === 'required' && <span className="text-red-400">Password is required</span>}
+               {errors.password?.type === 'minLength' && <span className="text-red-400">Password should at least 6 char</span>}
+               {errors.password?.type === 'maxLength' && <span className="text-red-400">Password should at under 10 char</span>} */}
+              {errors.password?.type === 'pattern' && <span className="text-red-400">Please provide at least one number, one uppercase, one lowercase & min length 6</span>}
+
             </div>
             <p><small>Have an account? Please <Link className='underline' to="/login">Login</Link></small></p>
             <div className="form-control mt-6">
