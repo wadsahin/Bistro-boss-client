@@ -1,22 +1,26 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import useAuth from '../../../Hooks/useAuth';
 import Swal from 'sweetalert2';
+import { IoCartOutline } from 'react-icons/io5';
+import useCart from '../../../Hooks/useCart';
 
 const Navbar = () => {
   const { user, signOutUser } = useAuth();
-  console.log(user);
+  const [cart] = useCart();
+  // console.log(user);
 
-  const handleSignout = () =>{
+
+  const handleSignout = () => {
     signOutUser()
-    .then(() => {
-      Swal.fire({
-        title: "Signout!",
-        text: "Signout successful",
-        icon: "success"
-      });
-    })
-    .catch(err => {console.log(err)})
+      .then(() => {
+        Swal.fire({
+          title: "Signout!",
+          text: "Signout successful",
+          icon: "success"
+        });
+      })
+      .catch(err => { console.log(err) })
   }
 
 
@@ -28,9 +32,17 @@ const Navbar = () => {
     <li><NavLink to="/dashboard">Dashboard</NavLink></li>
     <li><NavLink to="/shop">Our Shop</NavLink></li>
     <li><NavLink to="/secret">Secret</NavLink></li>
+    <li>
+      <Link to="/">
+        <button className="btn">
+          <IoCartOutline size={24} />
+          <div className="badge badge-secondary">{cart.length}</div>
+        </button>
+      </Link>
+    </li>
     {
       user ? <>
-        <span><img className='w-12 h-12 rounded-badge' src={user?.photoURL} alt="" /></span>
+        {/* <span><img className='w-12 h-12 rounded-badge' src={user?.photoURL} alt="" /></span> */}
         <button onClick={handleSignout} className='btn btn-sm btn-error text-white'>Signout</button>
       </> : <>
         <button className='btn btn-sm'><NavLink to="/login">Sign In</NavLink></button>
@@ -59,14 +71,14 @@ const Navbar = () => {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow gap-3">
+            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow gap-3 text-black">
             {NavOptions}
           </ul>
         </div>
         <a className="text-2xl font-semibold"><span className='text-orange-500'>Bistro</span> <span>Boss</span></a>
       </div>
       <div className="hidden lg:flex">
-        <ul className="menu menu-horizontal px-1 gap-3 items-center">
+        <ul className="menu menu-horizontal px-1 gap-1 items-center">
           {NavOptions}
         </ul>
       </div>
