@@ -2,11 +2,13 @@ import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../../Hooks/useAuth";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 
 
 const Register = () => {
   const { createUser, updateUserProfile } = useAuth();
   const navigate = useNavigate();
+  const axiosPublic = useAxiosPublic();
 
   // React hook form
   const {
@@ -25,12 +27,21 @@ const Register = () => {
         if (user) {
           updateUserProfile(data.name, data.photo)
             .then(() => {
-              Swal.fire({
-                title: "Registed!",
-                text: "Registed successfully",
-                icon: "success"
-              });
-              navigate("/");
+              const userInfo = {
+                name: data.name,
+                email: data.email,
+              }
+              axiosPublic.post("/users", userInfo)
+              .then(res => {
+                if(res.data.insertedId){
+                  Swal.fire({
+                    title: "Registed!",
+                    text: "Registed successfully",
+                    icon: "success"
+                  });
+                  navigate("/");
+                }
+              })         
             })
             .catch(err => {
               console.log(err.code);
