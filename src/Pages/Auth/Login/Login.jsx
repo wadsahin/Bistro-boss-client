@@ -3,6 +3,8 @@ import useAuth from '../../../Hooks/useAuth';
 import { useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { FaGoogle } from 'react-icons/fa6';
+import SocialLogin from '../../../Components/SocialLogin/SocialLogin';
 const Login = () => {
   const { signInUser } = useAuth();
   const navigate = useNavigate();
@@ -29,7 +31,7 @@ const Login = () => {
             text: "Login successful",
             icon: "success"
           });
-          navigate(from, {replace: true});
+          navigate(from, { replace: true });
         }
       })
       .catch(err => {
@@ -73,11 +75,17 @@ const Login = () => {
               </label>
               <input type="text" name="captcha" placeholder="Type above text" className="input input-bordered" required />
             </div>
-            <p><small>New here? Please <Link className='underline' to="/register">Register</Link></small></p>
             <div className="form-control mt-6">
               <button className="btn btn-primary">Login</button>
             </div>
+            <p><small>New here? Please <Link className='underline' to="/register">Register</Link></small></p>
+            <div className='divider my-0 -mb-5'></div>
           </form>
+
+          <div>
+            <SocialLogin></SocialLogin>
+          </div>
+
         </div>
       </div>
     </div>

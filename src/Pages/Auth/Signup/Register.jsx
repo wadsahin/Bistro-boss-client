@@ -3,6 +3,7 @@ import useAuth from "../../../Hooks/useAuth";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import SocialLogin from "../../../Components/SocialLogin/SocialLogin";
 
 
 const Register = () => {
@@ -32,16 +33,16 @@ const Register = () => {
                 email: data.email,
               }
               axiosPublic.post("/users", userInfo)
-              .then(res => {
-                if(res.data.insertedId){
-                  Swal.fire({
-                    title: "Registed!",
-                    text: "Registed successfully",
-                    icon: "success"
-                  });
-                  navigate("/");
-                }
-              })         
+                .then(res => {
+                  if (res.data.insertedId) {
+                    Swal.fire({
+                      title: "Registed!",
+                      text: "Registed successfully",
+                      icon: "success"
+                    });
+                    navigate("/");
+                  }
+                })
             })
             .catch(err => {
               console.log(err.code);
@@ -99,11 +100,15 @@ const Register = () => {
               {errors.password?.type === 'pattern' && <span className="text-red-400">Please provide at least one number, one uppercase, one lowercase & min length 6</span>}
 
             </div>
-            <p><small>Have an account? Please <Link className='underline' to="/login">Login</Link></small></p>
             <div className="form-control mt-6">
               <button className="btn btn-primary">Register</button>
             </div>
+            <p><small>Have an account? Please <Link className='underline' to="/login">Login</Link></small></p>
           </form>
+          <div className="divider mx-8 -mt-5"></div>
+          <div>
+            <SocialLogin></SocialLogin>
+          </div>
         </div>
       </div>
     </div>
