@@ -29,11 +29,11 @@ const Navbar = () => {
     <li><NavLink to="/menu">Our Menu</NavLink></li>
     <li><NavLink to="/order/offers">Order Food</NavLink></li>
     <li><NavLink to="/contact">Contact us</NavLink></li>
-    <li><NavLink to="/dashboard">Dashboard</NavLink></li>
+    {/* <li><NavLink to="/dashboard">Dashboard</NavLink></li> */}
     <li><NavLink to="/shop">Our Shop</NavLink></li>
     <li><NavLink to="/secret">Secret</NavLink></li>
     <li>
-      <Link to="/">
+      <Link to="/dashboard">
         <button className="btn">
           <IoCartOutline size={24} />
           <div className="badge badge-secondary">{cart.length}</div>
